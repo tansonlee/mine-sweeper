@@ -116,51 +116,60 @@ class Board {
 		if (this.state[i][j].mineNeighbors === 0) {
 			// top
 			if (j > 0) {
-				const top = this.state[i][j - 1];
-				if (!top.isMine) {
-					if (top.mineNeighbors === 0) {
-						this.reveal(i, j - 1);
-					}
-
-					top.isRevealed = true;
-				}
+				this.recursiveReveal(i, j - 1);
 			}
 
 			// right
 			if (i < cols - 1) {
-				const right = this.state[i + 1][j];
-				if (!right.isMine) {
-					if (right.mineNeighbors === 0) {
-						this.reveal(i + 1, j);
-					}
-
-					right.isRevealed = true;
-				}
+				this.recursiveReveal(i + 1, j);
 			}
 
 			// bottom
 			if (j < rows - 1) {
-				const bottom = this.state[i][j + 1];
-				if (!bottom.isMine) {
-					if (bottom.mineNeighbors === 0) {
-						this.reveal(i, j + 1);
-					}
-
-					bottom.isRevealed = true;
-				}
+				this.recursiveReveal(i, j + 1);
 			}
 
 			// left
 			if (i > 0) {
-				const left = this.state[i - 1][j];
-				if (!left.isMine) {
-					if (left.mineNeighbors === 0) {
-						this.reveal(i - 1, j);
-					}
+				this.recursiveReveal(i - 1, j);
+			}
+		}
+	}
 
-					left.isRevealed = true;
+	recursiveReveal(i, j) {
+		const cell = this.state[i][j];
+		if (!cell.isMine) {
+			if (cell.mineNeighbors === 0) {
+				this.reveal(i, j);
+			}
+
+			cell.isRevealed = true;
+		}
+	}
+
+	revealAll() {
+		for (let i = 0; i < this.state.length; i++) {
+			for (let j = 0; j < this.state[i].length; j++) {
+				this.state[i][j].isRevealed = true;
+			}
+		}
+	}
+
+	toggleFlag(i, j) {
+		this.state[i][j].isFlagged = !this.state[i][j].isFlagged;
+	}
+
+	checkWin() {
+		let revealed = 0;
+		for (let i = 0; i < this.state.length; i++) {
+			for (let j = 0; j < this.state[i].length; j++) {
+				if (this.state[i][j].isRevealed) {
+					revealed++;
 				}
 			}
+		}
+		if (revealed === 400 - 40) {
+			console.log("win");
 		}
 	}
 }

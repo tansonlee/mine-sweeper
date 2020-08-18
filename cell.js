@@ -2,6 +2,7 @@ class Cell {
 	constructor(i, j) {
 		this.isRevealed = false;
 		this.isMine = false;
+		this.isFlagged = false;
 		this.index = { i, j };
 		this.mineNeighbors = 0;
 	}
@@ -27,6 +28,11 @@ class Cell {
 				textAlign(CENTER, CENTER);
 				text(this.mineNeighbors, x + w / 2, y + w / 2);
 			}
+		}
+
+		if (this.isFlagged) {
+			fill(255, 0, 0);
+			ellipse(x + w / 2, y + w / 2, w / 3, w / 3);
 		}
 	}
 }
