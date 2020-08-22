@@ -1,13 +1,19 @@
 class Board {
-	constructor() {
+	constructor(rows, cols, mines) {
 		this.state = [];
+		this.rows = rows;
+		this.cols = cols;
+		this.mines = mines;
 		this.fillCells();
-		this.distributeMines(40);
+		this.distributeMines(mines);
 		this.fillCellNeighborValues();
+		this.lose = false;
 	}
 
 	fillCells() {
-		this.state = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
+		this.state = new Array(this.rows)
+			.fill(0)
+			.map(() => new Array(this.cols).fill(0));
 
 		for (let i = 0; i < this.state.length; i++) {
 			for (let j = 0; j < this.state[i].length; j++) {
@@ -23,6 +29,34 @@ class Board {
 				this.state[i][j].show();
 			}
 		}
+	}
+
+	showWin() {
+		for (let i = 0; i < this.state.length; i++) {
+			for (let j = 0; j < this.state[i].length; j++) {
+				this.state[i][j].showWin();
+			}
+		}
+	}
+
+	showLose() {
+		for (let i = 0; i < this.state.length; i++) {
+			for (let j = 0; j < this.state[i].length; j++) {
+				this.state[i][j].showLose();
+			}
+		}
+	}
+
+	winState() {
+		noLoop();
+		this.revealAll();
+		this.showWin();
+	}
+
+	loseState() {
+		noLoop();
+		this.revealAll();
+		this.showLose();
 	}
 
 	fillCellNeighborValues() {
@@ -133,6 +167,24 @@ class Board {
 			if (i > 0) {
 				this.recursiveReveal(i - 1, j);
 			}
+
+			// top left
+			if (i > 0 && j > 0) {
+				this.recursiveReveal(i - 1, j - 1);
+			}
+			// top right
+			if (i < cols - 1 && j > 0) {
+				this.recursiveReveal(i + 1, j - 1);
+			}
+			// bottom right
+			if (i < cols - 1 && j < rows - 1) {
+				this.recursiveReveal(i + 1, j + 1);
+			}
+
+			// bottom right
+			if (i > 0 && j < cols - 1) {
+				this.recursiveReveal(i - 1, j + 1);
+			}
 		}
 	}
 
@@ -168,8 +220,13 @@ class Board {
 				}
 			}
 		}
-		if (revealed === 400 - 40) {
-			console.log("win");
+		if (revealed === 400 - this.mines) {
+			return true;
 		}
+		return false;
+	}
+
+	checkLose() {
+		return this.lose;
 	}
 }
