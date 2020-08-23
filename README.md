@@ -1,16 +1,16 @@
 # Mine Sweeper
 
-### A simple 20x20 mine sweeper game.
+### A simple mine sweeper game
 
 Made with Javascript and visualized with the p5.js library.
 
-<img src="assets/game.gif" width="400px">
+<img src="assets/gameDark.gif" width="400px"><img src="assets/game.gif" width="400px">
 
 ---
 
 Features:
 - Colour can be toggled between a light and dark mode
-- A helper square can be toggled off and on
+- A helper square can be toggled on and off
 - Right-click to place a flag
 - 20x20 square which can be changed
 - 50 mines which can be changed
@@ -25,10 +25,16 @@ Game Rules
 
 ### Win
 
-<img src="assets/win.png" width = "400px"><img src="assets/winColour.png" width="400px">
+<img src="assets/winDark.png" width="400px"><img src="assets/win.png" width = "400px">
 
 ---
 
 ### Lose
 
-<img src="assets/lose.png" width = "400px"><img src="assets/loseColour.png" width="400px">
+<img src="assets/loseDark.png" width="400px"><img src="assets/lose.png" width = "400px">
+
+---
+
+### Features
+
+<img src="assets/features.gif" width="400px">

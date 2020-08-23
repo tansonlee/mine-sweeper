@@ -23,40 +23,36 @@ class Board {
 		}
 	}
 
-	show() {
+	show(isDarkMode, mineColor) {
 		for (let i = 0; i < this.state.length; i++) {
 			for (let j = 0; j < this.state[i].length; j++) {
-				this.state[i][j].show();
+				this.state[i][j].show(isDarkMode, mineColor);
 			}
 		}
 	}
 
-	showWin() {
-		for (let i = 0; i < this.state.length; i++) {
-			for (let j = 0; j < this.state[i].length; j++) {
-				this.state[i][j].showWin();
-			}
-		}
-	}
-
-	showLose() {
-		for (let i = 0; i < this.state.length; i++) {
-			for (let j = 0; j < this.state[i].length; j++) {
-				this.state[i][j].showLose();
-			}
-		}
-	}
-
-	winState() {
+	winState(isDarkMode) {
 		noLoop();
 		this.revealAll();
-		this.showWin();
+		if (isDarkMode) {
+			this.show(isDarkMode, color(6, 214, 160));
+		} else {
+			this.show(isDarkMode, color(0, 255, 0));
+		}
 	}
 
-	loseState() {
+	loseState(isDarkMode) {
 		noLoop();
 		this.revealAll();
-		this.showLose();
+		if (isDarkMode) {
+			this.show(isDarkMode, color(239, 71, 111));
+		} else {
+			this.show(isDarkMode, color(255, 0, 0));
+		}
+	}
+
+	normalState(isDarkMode) {
+		this.show(isDarkMode, color(255, 255, 255));
 	}
 
 	fillCellNeighborValues() {

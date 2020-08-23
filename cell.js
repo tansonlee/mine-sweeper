@@ -7,20 +7,35 @@ class Cell {
 		this.mineNeighbors = 0;
 	}
 
-	show() {
+	show(isDarkMode, mineColor) {
 		const x = this.index.i * w;
 		const y = this.index.j * w;
 
-		fill(7, 59, 76);
-		if (this.isRevealed) {
-			fill(17, 138, 178);
+		// drawing the background rectangle
+		if (isDarkMode) {
+			if (this.isRevealed) {
+				fill(17, 138, 178);
+			} else {
+				fill(7, 59, 76);
+			}
+		} else {
+			if (this.isRevealed) {
+				fill(200);
+			} else {
+				fill(140);
+			}
+		}
+		if (this.isMine && this.isRevealed) {
+			fill(mineColor);
 		}
 		rect(x, y, w, w);
 
+		// drawing a mine
 		if (this.isMine && this.isRevealed) {
 			image(mineImg, x + w / 2, y + w / 2);
 		}
 
+		// drawing the number
 		if (!this.isMine && this.isRevealed) {
 			if (this.mineNeighbors > 0) {
 				fill(0);
@@ -31,70 +46,7 @@ class Cell {
 			}
 		}
 
-		if (this.isFlagged) {
-			image(flagImg, x + w / 2, y + w / 2);
-		}
-	}
-
-	showWin() {
-		const x = this.index.i * w;
-		const y = this.index.j * w;
-
-		fill(7, 59, 76);
-		if (this.isRevealed) {
-			fill(17, 138, 178);
-		}
-		if (this.isMine) {
-			fill(6, 214, 160);
-		}
-		rect(x, y, w, w);
-
-		if (this.isMine && this.isRevealed) {
-			image(mineImg, x + w / 2, y + w / 2);
-		}
-
-		if (!this.isMine && this.isRevealed) {
-			if (this.mineNeighbors > 0) {
-				fill(0);
-				noStroke();
-				textAlign(CENTER, CENTER);
-				text(this.mineNeighbors, x + w / 2, y + w / 2);
-				stroke(0);
-			}
-		}
-
-		if (this.isFlagged) {
-			image(flagImg, x + w / 2, y + w / 2);
-		}
-	}
-
-	showLose() {
-		const x = this.index.i * w;
-		const y = this.index.j * w;
-
-		fill(7, 59, 76);
-		if (this.isRevealed) {
-			fill(17, 138, 178);
-		}
-		if (this.isMine) {
-			fill(239, 71, 111);
-		}
-		rect(x, y, w, w);
-
-		if (this.isMine && this.isRevealed) {
-			image(mineImg, x + w / 2, y + w / 2);
-		}
-
-		if (!this.isMine && this.isRevealed) {
-			if (this.mineNeighbors > 0) {
-				fill(0);
-				noStroke();
-				textAlign(CENTER, CENTER);
-				text(this.mineNeighbors, x + w / 2, y + w / 2);
-				stroke(0);
-			}
-		}
-
+		// drawing the flag
 		if (this.isFlagged) {
 			image(flagImg, x + w / 2, y + w / 2);
 		}

@@ -6,11 +6,13 @@ let board;
 
 let revealedColour;
 let helperToggle;
+let colorToggle;
 
 let flagImg;
 let mineImg;
 
 let helper = true;
+let isDarkMode = true;
 
 function preload() {
 	flagImg = loadImage("assets/flag.png");
@@ -22,6 +24,8 @@ function setup() {
 	revealedColour = color(17, 138, 178);
 	helperToggle = createButton("toggle helper");
 	helperToggle.mousePressed(() => (helper = !helper));
+	colorToggle = createButton("change colour");
+	colorToggle.mousePressed(() => (isDarkMode = !isDarkMode));
 
 	w = floor(width / cols);
 	board = new Board(rows, cols, mines);
@@ -31,15 +35,16 @@ function setup() {
 }
 
 function draw() {
-	board.show(revealedColour);
+	board.normalState(isDarkMode);
 	if (board.checkWin()) {
-		board.winState();
+		board.winState(isDarkMode);
 	}
 
 	if (board.checkLose()) {
-		board.loseState();
+		board.loseState(isDarkMode);
 	}
 
+	// draw the helper
 	if (helper) {
 		const index = indexFromXY(mouseX, mouseY);
 		if (index !== null) {
@@ -48,7 +53,11 @@ function draw() {
 
 			noFill();
 			strokeWeight(2);
-			stroke(255, 209, 102);
+			if (isDarkMode) {
+				stroke(255, 209, 102);
+			} else {
+				stroke(240, 128, 128);
+			}
 			rect(rectTop, rectLeft, w * 3, w * 3);
 			stroke(0);
 			strokeWeight(1);
