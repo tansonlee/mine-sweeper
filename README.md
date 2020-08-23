@@ -35,6 +35,6 @@ Game Rules
 
 ---
 
-### Features
+### Features (Toggle colour mode & helper)
 
 <img src="assets/features.gif" width="400px">
