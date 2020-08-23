@@ -11,28 +11,28 @@ class Cell {
 		const x = this.index.i * w;
 		const y = this.index.j * w;
 
-		fill(140);
+		fill(7, 59, 76);
 		if (this.isRevealed) {
-			fill(200);
+			fill(17, 138, 178);
 		}
 		rect(x, y, w, w);
 
 		if (this.isMine && this.isRevealed) {
-			fill(0);
-			ellipse(x + w / 2, y + w / 2, w / 2, w / 2);
+			image(mineImg, x + w / 2, y + w / 2);
 		}
 
 		if (!this.isMine && this.isRevealed) {
 			if (this.mineNeighbors > 0) {
 				fill(0);
+				noStroke();
 				textAlign(CENTER, CENTER);
 				text(this.mineNeighbors, x + w / 2, y + w / 2);
+				stroke(0);
 			}
 		}
 
 		if (this.isFlagged) {
-			fill(255, 0, 0);
-			ellipse(x + w / 2, y + w / 2, w / 3, w / 3);
+			image(flagImg, x + w / 2, y + w / 2);
 		}
 	}
 
@@ -40,31 +40,31 @@ class Cell {
 		const x = this.index.i * w;
 		const y = this.index.j * w;
 
-		fill(140);
+		fill(7, 59, 76);
 		if (this.isRevealed) {
-			fill(200);
+			fill(17, 138, 178);
 		}
 		if (this.isMine) {
-			fill(0, 255, 0);
+			fill(6, 214, 160);
 		}
 		rect(x, y, w, w);
 
 		if (this.isMine && this.isRevealed) {
-			fill(0);
-			ellipse(x + w / 2, y + w / 2, w / 2, w / 2);
+			image(mineImg, x + w / 2, y + w / 2);
 		}
 
 		if (!this.isMine && this.isRevealed) {
 			if (this.mineNeighbors > 0) {
 				fill(0);
+				noStroke();
 				textAlign(CENTER, CENTER);
 				text(this.mineNeighbors, x + w / 2, y + w / 2);
+				stroke(0);
 			}
 		}
 
 		if (this.isFlagged) {
-			fill(255, 0, 0);
-			ellipse(x + w / 2, y + w / 2, w / 3, w / 3);
+			image(flagImg, x + w / 2, y + w / 2);
 		}
 	}
 
@@ -72,31 +72,31 @@ class Cell {
 		const x = this.index.i * w;
 		const y = this.index.j * w;
 
-		fill(140);
+		fill(7, 59, 76);
 		if (this.isRevealed) {
-			fill(200);
+			fill(17, 138, 178);
 		}
 		if (this.isMine) {
-			fill(255, 0, 0);
+			fill(239, 71, 111);
 		}
 		rect(x, y, w, w);
 
 		if (this.isMine && this.isRevealed) {
-			fill(0);
-			ellipse(x + w / 2, y + w / 2, w / 2, w / 2);
+			image(mineImg, x + w / 2, y + w / 2);
 		}
 
 		if (!this.isMine && this.isRevealed) {
 			if (this.mineNeighbors > 0) {
 				fill(0);
+				noStroke();
 				textAlign(CENTER, CENTER);
 				text(this.mineNeighbors, x + w / 2, y + w / 2);
+				stroke(0);
 			}
 		}
 
 		if (this.isFlagged) {
-			fill(255, 0, 0);
-			ellipse(x + w / 2, y + w / 2, w / 3, w / 3);
+			image(flagImg, x + w / 2, y + w / 2);
 		}
 	}
 }
