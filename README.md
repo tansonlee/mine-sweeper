@@ -2,6 +2,8 @@
 
 ### A simple mine sweeper game
 
+Link to the game: [Mine Sweeper](https://tansonlee.github.io/mine-sweeper/)
+
 Made with Javascript and visualized with the p5.js library.
 
 <img src="assets/gameDark.gif" width="400px"><img src="assets/game.gif" width="400px">
